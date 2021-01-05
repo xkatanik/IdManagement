@@ -1,0 +1,23 @@
+{
+  "CELSPACAdmin.proband":[
+    "CELSPACAdmin.user",
+    "CladeIS.subject",
+    "CELSPACAdmin.sample",
+    "OpenSpecimen.proband" 
+  ],
+
+  "CELSPACAdmin.sample" : ["OpenSpecimen.specimen"],
+
+  "CladeIS.subject":[
+    "CladeIS.user",
+    "CladeIS.form"
+  ],
+
+  "OpenSpecimen.proband" : ["OpenSpecimen.specimen"],
+  "OpenSpecimen.specimen" : ["OpenSpecimen.aliquot", "OpenSpecimen.derivative"],
+  "OpenSpecimen.derivative" : ["OpenSpecimen.aliquot"],
+  "OpenSpecimen.aliquot" : ["OpenSpecimen.aliquot","LIMS.sample"],
+  "LIMS.sample" : ["LIMS.subsample"],
+  "LIMS.subsample" : ["LIMS.rawDataFile"],
+  "LIMS.rawDataFile" : ["Galaxy.experiment"]
+}

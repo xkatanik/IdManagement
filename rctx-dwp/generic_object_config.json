@@ -1,0 +1,37 @@
+{
+  "CELSPACAdmin" : {
+    "allowed": [
+      "family",
+      "proband",
+      "user",
+      "sample"
+    ]
+  },
+  "CladeIS": {
+    "allowed": [
+      "user",
+      "subject",
+      "form"
+    ]
+  },
+  "OpenSpecimen": {
+    "allowed": [
+      "proband",
+      "specimen",
+      "derivative",
+      "aliquot"
+    ]
+  },
+  "LIMS": {
+    "allowed":[
+      "sample",
+      "subsample",
+      "rawDataFile"
+    ]
+  },
+  "Galaxy": {
+    "allowed": [
+      "analysis"
+    ]
+  }
+}

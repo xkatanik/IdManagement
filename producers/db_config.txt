@@ -1,0 +1,5 @@
+[mysql]
+host = 78.128.251.219
+database = openspecimen
+user = dbuser
+password = testpw
