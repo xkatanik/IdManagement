@@ -25,7 +25,7 @@ while True:
   myresult = mycursor.fetchall()
   for x in myresult:
     if all(x):
-      data = prepareDataForLink(x[0], "CELSPACAdmin", "proband",  x[1], "OpenSpecimen", "proband", "user")
+      data = prepareDataForLink(x[0], "CELSPACAdmin", "proband",  x[1], "OpenSpecimen", "proband")
       if (sendData('proband-proband', data) == True):
         query = "DELETE FROM idmanagement_proband WHERE opsp_proband = %s ;"
         mycursor.execute(query, (x[1],))

@@ -13,7 +13,7 @@ def sendData(topic, data):
   return True
 
 
-def prepareDataForLink(registeredIdLeft, systemLeft, typeLeft, registeredIdRight, systemRight, typeRight, createdBy):
+def prepareDataForLink(registeredIdLeft, systemLeft, typeLeft, registeredIdRight, systemRight, typeRight):
   linkType = systemLeft + "." + typeLeft + "-" + systemRight + "." + typeRight
   data = {
         "entityLeft": {
@@ -29,14 +29,6 @@ def prepareDataForLink(registeredIdLeft, systemLeft, typeLeft, registeredIdRight
         "linkArgs": {
             "oriented": "true",
             "type": linkType
-        },
-        "userPropertyWho": {
-            "key": "createdBy",
-            "value": createdBy
-        },
-        "userPropertyWhen": {
-            "key": "createdAt",
-            "value": "whencreated"
         }
       }
   return data

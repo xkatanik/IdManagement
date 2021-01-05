@@ -7,18 +7,17 @@ from pydantic import BaseModel
 import requests as req
 import logging
 
-#API_ENDPOINT_OBJECTS = "http://10.16.117.176:8080/generic-objects/"
-#API_ENDPOINT_LINKS = "http://10.16.117.176:8080/links/"
 
 
 API_ENDPOINT_OBJECTS = "http://localhost:8080/generic-objects/"
 API_ENDPOINT_LINKS = "http://localhost:8080/links/"
+
 app = FastAPI()
 
 root_logger= logging.getLogger()
 root_logger.setLevel(logging.WARNING)
-handler = logging.FileHandler('rctx.log', 'w', 'utf-8') # or whatever
-handler.setFormatter(logging.Formatter('%(name)s %(message)s')) # or whatever
+handler = logging.FileHandler('rctx.log', 'w', 'utf-8')
+handler.setFormatter(logging.Formatter('%(name)s %(message)s'))
 root_logger.addHandler(handler)
 
 class Entity(BaseModel):
@@ -70,7 +69,6 @@ async def create_link(entityLeft: Entity, entityRight: Entity, linkArgs: LinkArg
     try:
         validate_link(entityLeft.system, entityLeft.type, entityRight.system, entityRight.type)
     except Exception as inst:
-        print(type(inst))    # the exception instance
         response.status_code = 410
         return response
 
@@ -105,13 +103,10 @@ async def create_link(entityLeft: Entity, entityRight: Entity, linkArgs: LinkArg
 
     if (leftEntityCreated):
         logging.warning("WARNING: Left entity is not yet created.\n" + "left entity id:" + entityLeft.registeredId + "\n" + "right entity id:" + entityRight.registeredId + "\n" + "link type:" + linkArgs.type + "\n")
-        #todo write it to log, it isnt good if left is not created yet
     if ( not leftEntityCreated and not rightEntityCreated and not linkCreated):
         logging.warning("WARNING: Possible duplicated message.\n" + "left entity id:" + entityLeft.registeredId + "\n" + "right entity id:" + entityRight.registeredId + "\n" + "link type:" + linkArgs.type + "\n")
-        #todo we have duplicate message here
     if (leftEntityCreated and not rightEntityCreated):
         logging.warning("WARNING: One message can came before the other, kafka or producer issue.\n" + "left entity id:" + entityLeft.registeredId + "\n" + "right entity id:" + entityRight.registeredId + "\n" + "link type:" + linkArgs.type + "\n")
-        #todo one message came before the other, kafka issue or producer issue
 
 
     return
@@ -180,7 +175,6 @@ async def create_entity(entity: Entity, response: Response):
     try:
         validate_generic_object(entity.system, entity.type)
     except Exception as inst:
-        print(type(inst))    # the exception instance
         response.status_code = 410
         return response
     r = req.get(url = API_ENDPOINT_OBJECTS + "?registeredId=" + entity.registeredId)

@@ -34,13 +34,13 @@ while True:
         query = "SELECT participant_id FROM catissue_coll_prot_reg WHERE identifier = %s"
         mycursor.execute(query, (reg_id[0][0],))
         participant = mycursor.fetchall()
-        data = prepareDataForLink(participant[0][0], "OpenSpecimen", "proband", x[0],"OpenSpecimen","specimen","user")
+        data = prepareDataForLink(participant[0][0], "OpenSpecimen", "proband", x[0],"OpenSpecimen","specimen")
     
     elif x[3] == "Derived":
       query = "SELECT barcode FROM catissue_specimen WHERE identifier = %s"
       mycursor.execute(query, (x[2],))
       registeredIdLeft = mycursor.fetchall()
-      data = prepareDataForLink(registeredIdLeft[0][0],"OpenSpecimen","specimen",x[0],"OpenSpecimen","derivative","user")
+      data = prepareDataForLink(registeredIdLeft[0][0],"OpenSpecimen","specimen",x[0],"OpenSpecimen","derivative")
     elif x[3] == "Aliquot":
         query = "SELECT lineage FROM catissue_specimen WHERE identifier = %s"
         mycursor.execute(query, (x[2],))
@@ -57,7 +57,7 @@ while True:
         query = "SELECT barcode FROM catissue_specimen WHERE identifier = %s"
         mycursor.execute(query, (x[2],))
         registeredIdLeft = mycursor.fetchall()
-        data = prepareDataForLink(registeredIdLeft[0][0],"OpenSpecimen",lineage_type,x[0],"OpenSpecimen","aliquot","user")
+        data = prepareDataForLink(registeredIdLeft[0][0],"OpenSpecimen",lineage_type,x[0],"OpenSpecimen","aliquot")
     else:
 
     
