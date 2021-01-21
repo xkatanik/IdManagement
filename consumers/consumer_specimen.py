@@ -3,8 +3,8 @@ from json import loads
 import json
 import requests as req
 
-API_ENDPOINT_OBJECTS = "http://127.0.0.1:8000/create-link/"
-API_ENDPOINT_LINKS = "http://localhost:8080/links/"
+API_ENDPOINT_OBJECTS = "http://192.168.16.184:8000/create-link/"
+API_ENDPOINT_LINKS = "http://192.168.16.184:8080/links/"
 
 root_logger= logging.getLogger()
 root_logger.setLevel(logging.ERROR)
@@ -15,9 +15,15 @@ root_logger.addHandler(handler)
 consumer = KafkaConsumer(
     'specimen',
     group_id='console-consumer-6420',
-     bootstrap_servers=['78.128.251.219:9092'],
+     bootstrap_servers=['78.128.251.94:9092'],
      auto_offset_reset='earliest',
      enable_auto_commit=False,
+    security_protocol='SASL_SSL',
+                         sasl_mechanism='PLAIN',
+                         sasl_plain_username='alice',
+                         sasl_plain_password='alice-secret',
+                         ssl_check_hostname=True,
+                         ssl_cafile='cacert.pem',
      value_deserializer=lambda x: loads(x.decode('utf-8')))
 
 for msg in consumer:

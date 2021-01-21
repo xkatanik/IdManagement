@@ -9,8 +9,8 @@ import logging
 
 
 
-API_ENDPOINT_OBJECTS = "http://localhost:8080/generic-objects/"
-API_ENDPOINT_LINKS = "http://localhost:8080/links/"
+API_ENDPOINT_OBJECTS = "http://192.168.16.184:8080/generic-objects/"
+API_ENDPOINT_LINKS = "http://192.168.16.184:8080/links/"
 
 app = FastAPI()
 
