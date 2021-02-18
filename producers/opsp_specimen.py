@@ -59,7 +59,7 @@ while True:
         registeredIdLeft = mycursor.fetchall()
         data = prepareDataForLink(registeredIdLeft[0][0],"OpenSpecimen",lineage_type,x[0],"OpenSpecimen","aliquot")
     else:
-
+        print("No viable data")
     
     if (sendData('specimen', data) == True):
         query = "DELETE FROM idmanagement_specimen WHERE barcode = %s ;"
