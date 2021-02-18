@@ -2,8 +2,9 @@ from kafka import KafkaConsumer
 from json import loads
 import json
 import requests as req
+import logging
 
-API_ENDPOINT_OBJECTS = "http://192.168.16.184:8000/create-link/"
+API_ENDPOINT_OBJECTS = "http://localhost:8000/create-link/"
 API_ENDPOINT_LINKS = "http://192.168.16.184:8080/links/"
 
 root_logger= logging.getLogger()
@@ -28,13 +29,13 @@ consumer = KafkaConsumer(
 
 for msg in consumer:
     r = req.post(url = API_ENDPOINT_OBJECTS, data=json.dumps(msg.value))
-    if (r.status_code = 410):
+    if (r.status_code == 410):
         logging.error("ERROR: Validation failed. Message:" + msg)
         consumer.commit()
-    elif (r.status_code = 415):
+    elif (r.status_code == 415):
         logging.error("ERROR: Entity does not exist. Message:" + msg)
         consumer.commit()
-    elif (r.status_code = 201):
+    elif (r.status_code == 201):
         consumer.commit()
     else:
-        logging.error("ERROR: Error occured. Response message:" + r)
+        logging.error("ERROR: Error occured. Response message:" + r.text)
